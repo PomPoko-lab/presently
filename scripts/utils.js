@@ -14,3 +14,21 @@ export const loadFile = async (filePath) => {
         throw error;
     }
 };
+
+/**
+ * Escapes special HTML characters in a string.
+ * Converts characters like &, <, >, ", and ' to their corresponding HTML entities.
+ * 
+ * @param {string} text - The input string to escape.
+ * @returns {string} The escaped string with HTML entities.
+ */
+
+export const escapeHtml = (text) => {
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/`/g, "&#96;")
+      .replace(/'/g, "&#039;");
+};

@@ -1,4 +1,5 @@
 import { Slide } from "../types.js";
+import { escapeHtml } from "../utils.js";
 export default class {
     /** @private */
     DELIMITER = '---';
@@ -31,8 +32,52 @@ export default class {
      */
     markdownToHtml(md) {
         if (!md) return '';
-
         let html = md;
+        
+        // Code blocks with language support
+        html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (match, lang, code) => {
+            const language = lang ? ` class="language-${lang}"` : ''; // No syntax highlighting for now
+            return `<pre><code${language}>${escapeHtml(code.trim())}</code></pre>`;
+        });
+        
+        // Inline code (single backticks)
+        html = html.replace(/`([^`]+)`/g, (match, code) => 
+            `<code class="inline-code">${escapeHtml(code)}</code>`);
+        
+        // Headers
+        html = html.replace(/^# (.*$)/gm, '<h2>$1</h2>');
+        html = html.replace(/^## (.*$)/gm, '<h3>$1</h3>');
+        html = html.replace(/^### (.*$)/gm, '<h4>$1</h4>');
+        
+        // Bold, italic and strikethrough
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
+        
+        // Unordered lists
+        html = html.replace(/^\* (.*$)/gm, '<li>$1</li>');
+        html = html.replace(/^- (.*$)/gm, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>)+/g, '<ul>$&</ul>');
+        
+        // Ordered lists
+        html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
+        
+        // Blockquotes
+        html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
+        
+        // Horizontal rule
+        html = html.replace(/^---$/gm, '<hr>');
+        
+        // Links and images
+        html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+        html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">');
+        
+        // Paragraphs (avoiding nested tags)
+        html = html.replace(/^(?!<[a-z]).+$/gm, match => {
+            if (match.trim() === '') return match;
+            return `<p>${match}</p>`;
+        });
+        
         return html;
     }
 
