@@ -91,7 +91,8 @@ export default class {
             hasNext: this.currentIndex < this.slides.length - 1,
             hasPrevious: this.currentIndex > 0,
             currentIndex: this.currentIndex + 1,
-            totalSlides: this.slides.length
+            totalSlides: this.slides.length,
+            percentageCompleted: ((this.currentIndex + 1) / this.slides.length) * 100
         };
     }
 

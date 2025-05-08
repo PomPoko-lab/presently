@@ -151,3 +151,21 @@ code.inline-code {
     color: #333;
     cursor: pointer;
 }
+
+#progress-container {
+    width: 100%;
+    height: 4px;
+    background-color: #e0e0e0;
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary);
+    width: 0%; /* Will be updated with JS */
+    transition: width 0.3s ease;
+}

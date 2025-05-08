@@ -20,6 +20,8 @@ const totalSlides = document.getElementById('total-slides');
 /** @type {HTMLInputElement?} */
 const mdFileUploader = document.querySelector('input#md-uploader');
 
+const progressBar = document.getElementById('slide-progress-bar');
+
 /**
  * Loads markdown content from the given URL or path and displays
  * its first slide. Also updates the total number of slides.
@@ -35,6 +37,10 @@ const loadMarkdown = async (markdownPath) => {
         handleSlideChange(currentSlide);
         if (totalSlides) {
             totalSlides.textContent = currentSlide.totalSlides.toString();
+        }
+
+        if (progressBar) {
+            progressBar.style.width = `${currentSlide.percentageCompleted}%`;
         }
     } catch (e) {
         console.error(e);
@@ -59,6 +65,10 @@ const handleSlideChange = (slide) => {
 
     if (currentSlideIndex) {
         currentSlideIndex.textContent = slide.currentIndex.toString();
+    }
+
+    if (progressBar && slide.totalSlides > 1) {
+        progressBar.style.width = `${slide.percentageCompleted}%`;
     }
 }
 

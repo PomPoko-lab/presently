@@ -6,6 +6,7 @@
  * @prop {boolean} hasPrevious - if there is a previous slide
  * @prop {number} currentIndex - the current slide index
  * @prop {number} totalSlides - total number of slides
+ * @prop {number} percentageCompleted - percentage completed
  */
 
 export const Slide = {};
