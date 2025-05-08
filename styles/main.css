@@ -96,8 +96,6 @@ code.inline-code {
 #slide-controllers {
     border-radius: var(--border-radius);
     margin: 2rem 0;
-    padding: 0.5rem;
-
     background-color: white;
     padding: 1rem;
     display: flex;
@@ -166,6 +164,17 @@ code.inline-code {
 .progress-bar {
     height: 100%;
     background-color: var(--primary);
-    width: 0%; /* Will be updated with JS */
+    width: 0%; /* Updated with JS */
     transition: width 0.3s ease;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: default;
 }

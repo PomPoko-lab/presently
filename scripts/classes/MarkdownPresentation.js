@@ -35,47 +35,67 @@ export default class {
         let html = md;
         
         // Code blocks with language support
-        html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (match, lang, code) => {
-            const language = lang ? ` class="language-${lang}"` : ''; // No syntax highlighting for now
-            return `<pre><code${language}>${escapeHtml(code.trim())}</code></pre>`;
+        // Regex Matches: ```code```
+        // Store code blocks in an array and replace with tokens
+        /** @type {string[]} */
+        const codeBlocks = [];
+        
+        // Tokenize the code blocks to hide them from <p>
+        html = html.replace(/```([\s\S]*?)```/g, (match, code) => {
+            const id = codeBlocks.length;
+            codeBlocks.push(code.trim());
+            return `__CODE_BLOCK_${id}__`;
         });
         
         // Inline code (single backticks)
-        html = html.replace(/`([^`]+)`/g, (match, code) => 
+        // Regex Matches: `code`
+        html = html.replace(/`([^`]+)`/g, (match, code) =>  
             `<code class="inline-code">${escapeHtml(code)}</code>`);
         
         // Headers
+        // Regex Matches: #, ##, ###
         html = html.replace(/^# (.*$)/gm, '<h2>$1</h2>');
         html = html.replace(/^## (.*$)/gm, '<h3>$1</h3>');
         html = html.replace(/^### (.*$)/gm, '<h4>$1</h4>');
         
         // Bold, italic and strikethrough
+        // Regex Matches: **bold**, *italic*, ~~strikethrough~~
         html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
         html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
+
+        // Checkboxes
+        // Regex Matches: - [x] text
+        html = html.replace(/^\s*-\s+\[([ xX])\]\s+(.*$)/gm, (match, checked, text) => {
+            const isChecked = checked.toLowerCase() === 'x' ? 'checked' : '';
+            return `<div class="checkbox-item"><input type="checkbox" ${isChecked} disabled><span>${text}</span></div>`;
+        });
         
         // Unordered lists
+        // Regex Matches: *, -
         html = html.replace(/^\* (.*$)/gm, '<li>$1</li>');
         html = html.replace(/^- (.*$)/gm, '<li>$1</li>');
         html = html.replace(/(<li>.*<\/li>)+/g, '<ul>$&</ul>');
         
         // Ordered lists
+        // Regex Matches: 1.
         html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
         
-        // Blockquotes
-        html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
-        
-        // Horizontal rule
-        html = html.replace(/^---$/gm, '<hr>');
-        
         // Links and images
+        // Regex Matches: [text](url)
+        html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" loading="lazy" height="auto" style="max-width: 200px; max-height: 200px">');
         html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
-        html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">');
         
         // Paragraphs (avoiding nested tags)
-        html = html.replace(/^(?!<[a-z]).+$/gm, match => {
-            if (match.trim() === '') return match;
-            return `<p>${match}</p>`;
+        // Regex Matches: text
+        html = html.replace(/^(?!<.*>$|$)(.+)$/gm, '<p>$1</p>');
+
+        // Restore the code blocks
+        codeBlocks.forEach((code, id) => {
+            html = html.replace(
+                `__CODE_BLOCK_${id}__`, 
+                `<pre><code>${escapeHtml(code)}</code></pre>`
+            );
         });
         
         return html;

@@ -15,9 +15,11 @@ Regular paragraph text looks like this.
 
 You can also use ~~strikethrough~~ if needed.
 
-> Blockquotes help highlight important information
-> - They can contain multiple lines
-> - And even other elements
+## Checkboxes
+
+ - [x] First Item
+ - [x] Second Item
+ - [ ] Third Item
 
 ---
 
@@ -46,10 +48,13 @@ You can also use ~~strikethrough~~ if needed.
 Inline code: `const x = 10;`
 
 ```javascript
-// Code block with syntax highlighting
 function greeting(name) {
   return `Hello, ${name}!`;
 }
 
 console.log(greeting('Presenter'));
 ```
+
+---
+## Images
+![Example Image](https://placehold.co/100x50)
