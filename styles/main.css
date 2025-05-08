@@ -23,12 +23,14 @@ body {
     background-color: #f0f0f0;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 main {
-    margin: 1rem;
+    padding: 1rem;
+    width: 100%;
     max-width: 800px;
     flex-grow: 1;
 }
@@ -37,7 +39,7 @@ main {
     background-color: white;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    margin-bottom: 1rem;
+    margin-bottom: 3.5rem;
     position: relative;
     height: 400px;
     display: flex;
@@ -122,4 +124,30 @@ code.inline-code {
 
 #slide-info {
     color: #9d9d9d;
+}
+
+.file-upload {
+    display: inline-block;
+    position: relative;
+    margin: 1rem 0;
+}
+
+/** Hides the input element */
+.file-input {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.file-label {
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
 }

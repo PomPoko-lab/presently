@@ -17,9 +17,18 @@ const nextSlideBtn = document.querySelector('button#next-slide-btn');
 const currentSlideIndex = document.getElementById('current-slide-index');
 const totalSlides = document.getElementById('total-slides');
 
-const loadInitialMarkdown = async () => {
+/** @type {HTMLInputElement?} */
+const mdFileUploader = document.querySelector('input#md-uploader');
+
+/**
+ * Loads markdown content from the given URL or path and displays
+ * its first slide. Also updates the total number of slides.
+ * @param {string} markdownPath - URL or relative path to the markdown content
+ * @throws {Error} If the markdown content cannot be loaded
+ */
+const loadMarkdown = async (markdownPath) => {
     try {
-        const markdown = await loadFile(DEFAULT_MARKDOWN_PATH);
+        const markdown = await loadFile(markdownPath);
         presentation = new MarkdownPresentation(markdown);
         const currentSlide = presentation.getCurrentSlide();
 
@@ -29,7 +38,7 @@ const loadInitialMarkdown = async () => {
         }
     } catch (e) {
         console.error(e);
-        alert(`Failed to load initial markdown.`);
+        alert(`Failed to load the markdown file.`);
     }
 }
 
@@ -53,6 +62,11 @@ const handleSlideChange = (slide) => {
     }
 }
 
+/**
+ * Handles the next slide button click event.
+ * If there is a next slide, updates the main content and navigation buttons.
+ * @param {Event} event - The click event triggered by the next slide button.
+ */
 nextSlideBtn?.addEventListener('click', () => {
     if (!presentation) {
         return;
@@ -61,6 +75,11 @@ nextSlideBtn?.addEventListener('click', () => {
     handleSlideChange(nextSlide);
 });
 
+/**
+ * Handles the previous slide button click event.
+ * If there is a previous slide, updates the main content and navigation buttons.
+ * @param {Event} event - The click event triggered by the previous slide button.
+ */
 prevSlideBtn?.addEventListener('click', () => {
     if (!presentation) {
         return;
@@ -69,5 +88,19 @@ prevSlideBtn?.addEventListener('click', () => {
     handleSlideChange(prevSlide);
 });
 
+/**
+ * Handles the file upload event and loads the selected .md file.
+ * @param {Event} event - The change event triggered by the file upload input.
+ */
+mdFileUploader?.addEventListener('change', async () => {
+    const file = mdFileUploader?.files?.[0];
+    if (!file) {
+        alert('No valid .md file selected.');
+        return;
+    }
+    const fileUrl = URL.createObjectURL(file);
+    loadMarkdown(fileUrl);
+});
+
 // Load the default.md on page load
-loadInitialMarkdown();
+loadMarkdown(DEFAULT_MARKDOWN_PATH);
