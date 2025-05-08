@@ -14,6 +14,9 @@ const prevSlideBtn = document.querySelector('button#prev-slide-btn');
 /** @type {HTMLButtonElement?} */
 const nextSlideBtn = document.querySelector('button#next-slide-btn');
 
+const currentSlideIndex = document.getElementById('current-slide-index');
+const totalSlides = document.getElementById('total-slides');
+
 const loadInitialMarkdown = async () => {
     try {
         const markdown = await loadFile(DEFAULT_MARKDOWN_PATH);
@@ -21,6 +24,9 @@ const loadInitialMarkdown = async () => {
         const currentSlide = presentation.getCurrentSlide();
 
         handleSlideChange(currentSlide);
+        if (totalSlides) {
+            totalSlides.textContent = currentSlide.totalSlides.toString();
+        }
     } catch (e) {
         console.error(e);
         alert(`Failed to load initial markdown.`);
@@ -40,6 +46,10 @@ const handleSlideChange = (slide) => {
     }
     if (nextSlideBtn) {
         nextSlideBtn.disabled = !slide.hasNext;
+    }
+
+    if (currentSlideIndex) {
+        currentSlideIndex.textContent = slide.currentIndex.toString();
     }
 }
 

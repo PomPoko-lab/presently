@@ -119,3 +119,7 @@ code.inline-code {
     cursor: not-allowed;
     filter: contrast(70%);
 }
+
+#slide-info {
+    color: #9d9d9d;
+}
