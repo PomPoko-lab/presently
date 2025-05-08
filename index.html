@@ -40,6 +40,16 @@
             border: 1px solid #d4d4d4;
         }
 
+        #main-slide > #content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #main-slide > #content > h3 {
+            color: var(--primary);
+        }
+
         #slide-controllers {
             border-radius: var(--border-radius);
             margin: 2rem 0;
@@ -74,11 +84,14 @@
 <body>
     <main>
         <section id="main-slide">
-            Testing Main Slide
+            <div id="content">
+
+            </div>
         </section>
 
         <section id="slide-controllers">
             <button type="button" id="prev-slide-btn">Prev</button>
+            <p>Slide 1 of </p>
             <button type="button" id="next-slide-btn">Next</button>
         </section>
     </main>
