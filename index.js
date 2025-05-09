@@ -65,9 +65,11 @@ const handleSlideChange = (slide) => {
     }
     if (prevSlideBtn) {
         prevSlideBtn.disabled = !slide.hasPrevious;
+        mainContent?.scrollTo(0, 0); // Resets the scroll position to the top
     }
     if (nextSlideBtn) {
         nextSlideBtn.disabled = !slide.hasNext;
+        mainContent?.scrollTo(0, 0); // Resets the scroll position to the top
     }
 
     if (currentSlideIndex) {
@@ -209,6 +211,11 @@ window.addEventListener('keyup', (event) => {
 
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
         return;
+    }
+
+    const editSlideContent = document.querySelector('textarea#edit-slide-content');
+    if (editSlideContent) {
+        return; // Ignore arrow key events when in edit mode
     }
 
     if (event.key === 'ArrowLeft') {
