@@ -184,6 +184,9 @@ saveSlideBtn?.addEventListener('click', () => {
     handleSlideChange(currentSlide);
 });
 
+/**
+ * Handles the delete button click event. Prompts for user confirmation and deletes the current slide
+ */
 deleteSlideBtn?.addEventListener('click', () => {
     if (!presentation) {
         return;
