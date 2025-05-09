@@ -17,6 +17,7 @@ html, body {
     --secondary: #FBFBFB;
     --border-radius: 0.5rem;
     --shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    --main-slide-height: 400px;
 }
 
 body {
@@ -41,7 +42,7 @@ main {
     box-shadow: var(--shadow);
     margin-bottom: 3.5rem;
     position: relative;
-    height: 400px;
+    height: var(--main-slide-height);
     display: flex;
     flex-direction: column;
     border: 1px solid #d4d4d4;
@@ -61,7 +62,7 @@ main {
 
 pre {
     background-color: #f7f7f7;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     margin: 1.5rem 0;
     padding: 1rem;
     border-left: 4px solid var(--primary);
@@ -87,7 +88,7 @@ pre code {
 code.inline-code {
     background-color: #f1f1f1;
     padding: 0.2rem 0.4rem;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
     font-size: 0.9em;
     color: #d63384;
@@ -141,7 +142,7 @@ code.inline-code {
 
 .file-label {
     background-color: white;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     border: 1px solid #e0e0e0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     padding: 8px 16px;
@@ -182,4 +183,42 @@ code.inline-code {
 ul > li, ol > li {
     margin-left: 1rem;
     margin-bottom: 0.5rem;
+}
+
+#edit-slide-controllers {
+    margin: 0.5rem auto 0 auto;
+}
+
+#edit-slide-controllers button {
+    background-color: white;
+    color: #333;
+    border-radius: var(--border-radius);
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+#edit-slide-controllers button:not(:disabled):hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+#edit-slide-controllers button:disabled {
+    cursor: not-allowed;
+    filter: contrast(70%);
+}
+
+textarea#edit-slide-content {
+    width: 100%;
+    height: calc(var(--main-slide-height) - 50px);
+    border-radius: var(--border-radius);
+    border: 1px solid #e0e0e0;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #333;
+}
+
+.d-none {
+    display: none !important;
 }

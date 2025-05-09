@@ -15,13 +15,18 @@ export default class {
     /**
      * Parse markdown into slides
      * @param {string} markdown - Markdown content
-     * @returns {string[]} Array of HTML slides
+     * @returns {{html: string, rawContent: string}[]} Array of HTML slides
      * @private
      */
     parseMarkdownToSlides(markdown) {
         const slidesMarkdown = markdown.split(this.DELIMITER);
 
-        return slidesMarkdown.map(md => this.markdownToHtml(md.trim()));
+        return slidesMarkdown.map(md => {
+            return {
+                'html': this.markdownToHtml(md.trim()),
+                'rawContent': md.trim()
+            };
+        });
     }
 
     /**
@@ -110,12 +115,44 @@ export default class {
     }
 
     /**
+     * Gets the current slides raw markdown and re-parses the HTML
+     * @return {void}
+     */
+
+    reparseCurrentSlideMarkdown() {
+        const currentSlide = this.getCurrentSlide();
+        const newHtml = this.markdownToHtml(currentSlide.rawContent);
+        this.slides[this.currentIndex].html = newHtml;
+    }
+
+    /**
+     * Sets the current slide's markdown content and re-parses the HTML
+     * @param {string} markdown - New markdown content for the current slide
+     * @param {boolean} skipReparse - Skip re-parsing the HTML
+     * @returns {void}
+     */
+    setCurrentSlideMarkdown(markdown, skipReparse = false) {
+        this.slides[this.currentIndex].rawContent = markdown;
+        this.reparseCurrentSlideMarkdown();
+    }
+
+    /**
+     * Deletes the current slide and moves to the previous slide, if it exists
+     * @returns {void}
+     */
+    deleteCurrentSlide() {
+        this.slides.splice(this.currentIndex, 1);
+        this.currentIndex = Math.min(this.currentIndex, this.slides.length - 1);
+    }
+
+    /**
      * Get the current slide
      * @returns {Slide} Current slide info with HTML and navigation state
      */
     getCurrentSlide() {
         return {
-            html: this.slides[this.currentIndex],
+            html: this.slides[this.currentIndex].html,
+            rawContent: this.slides[this.currentIndex].rawContent,
             hasNext: this.currentIndex < this.slides.length - 1,
             hasPrevious: this.currentIndex > 0,
             currentIndex: this.currentIndex + 1,
