@@ -13,7 +13,7 @@ body {
 }
 
 main {
-    padding: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
     width: 100%;
     max-width: 800px;
     flex-grow: 1;
@@ -42,7 +42,6 @@ main {
 
 #slide-controllers {
     border-radius: var(--border-radius);
-    margin: var(--spacing-lg) 0;
     background-color: var(--white);
     padding: var(--spacing-sm);
     display: flex;
@@ -105,7 +104,6 @@ main {
     border-radius: 2px;
     overflow: hidden;
     margin-top: -2rem;
-    margin-bottom: var(--spacing-lg);
 }
 
 .progress-bar {
@@ -137,4 +135,18 @@ main {
 #edit-slide-controllers button:disabled {
     cursor: not-allowed;
     filter: contrast(70%);
+}
+
+@media (min-height: 700px) {
+    main {
+        padding: var(--spacing-sm);
+    }
+
+    #slide-controllers {
+        margin: var(--spacing-lg) 0;
+    }
+
+    #progress-container {
+        margin-bottom: var(--spacing-lg);
+    }
 }
