@@ -17,7 +17,7 @@ html, body {
     --secondary: #FBFBFB;
     --border-radius: 0.5rem;
     --shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    --main-slide-height: 400px;
+    --main-slide-height: 600px;
 }
 
 body {

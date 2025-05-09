@@ -1,4 +1,4 @@
-# Welcome to Presently! Test MD
+# Welcome to Presently!
 
 This is a markdown presentation tool.
 
@@ -15,9 +15,11 @@ Regular paragraph text looks like this.
 
 You can also use ~~strikethrough~~ if needed.
 
-> Blockquotes help highlight important information
-> - They can contain multiple lines
-> - And even other elements
+## Checkboxes
+
+ - [x] First Item
+ - [x] Second Item
+ - [ ] Third Item
 
 ---
 
@@ -27,16 +29,12 @@ You can also use ~~strikethrough~~ if needed.
 
 * Item one
 * Item two
-  * Nested item
-  * Another nested item
 * Item three
 
 ### Ordered Lists
 
 1. First item
 2. Second item
-   1. Nested numbered item
-   2. Another nested item
 3. Third item
 
 ---
@@ -46,10 +44,13 @@ You can also use ~~strikethrough~~ if needed.
 Inline code: `const x = 10;`
 
 ```javascript
-// Code block with syntax highlighting
 function greeting(name) {
   return `Hello, ${name}!`;
 }
 
 console.log(greeting('Presenter'));
 ```
+
+---
+## Images
+![Example Image](https://placehold.co/100x50)

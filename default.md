@@ -1,56 +1,118 @@
-# Welcome to Presently!
+# Presently: A Markdown Presentation Tool
 
-This is a markdown presentation tool.
+## Architecture
 
-* Navigate with arrow keys or buttons
-* Display slides using markdown
+### Core Technologies
+- **Vanilla JavaScript** with JSDoc for type checking
+- **No frameworks** - pure HTML, CSS, and JS
+- **Module pattern** for code organization
+- **Mobile-first responsive design**
 
----
-
-## Basic Formatting
-
-Regular paragraph text looks like this.
-
-**Bold text** and *italic text* are supported.
-
-You can also use ~~strikethrough~~ if needed.
-
-## Checkboxes
-
- - [x] First Item
- - [x] Second Item
- - [ ] Third Item
+### Component Structure
+- **MarkdownPresentation class**: Core engine for parsing and navigation
+- **UI Components**: Modular elements like slides, controllers, editor
+- **Utils**: Helper functions for file loading and HTML escaping
 
 ---
 
-## Lists and Structure
-
-### Unordered Lists
-
-* Item one
-* Item two
-* Item three
-
-### Ordered Lists
-
-1. First item
-2. Second item
-3. Third item
+### Data Flow
+1. Load markdown content
+2. Parse into slides
+3. Render current slide
+4. Navigate via UI controls or keyboard
+5. Edit mode for content modification
 
 ---
 
-## Code Examples
+## Design Considerations
 
-Inline code: `const x = 10;`
+### Framework Decision
+- Considered Vue.js with TypeScript to align with job requirements
+- Opted for vanilla JS as framework would be overkill
+- JSDoc provides type safety without TypeScript complexity
+- Easier to demonstrate core JavaScript skills
 
-```javascript
-function greeting(name) {
-  return `Hello, ${name}!`;
-}
+### Responsive Design
+- Mobile-first approach ensures compatibility across devices
+- Flexible layouts with Flexbox
+- Media queries for device-specific optimizations
 
-console.log(greeting('Presenter'));
-```
+### Performance Optimizations
+- Minimal DOM manipulation
+- Debounced navigation events
+- Lazy loading for images
 
 ---
-## Images
-![Example Image](https://placehold.co/100x50)
+
+### Separation of Concerns
+- Markdown parsing logic isolated from presentation logic
+- Content separate from styling
+- Navigation functionality independent of content rendering
+
+### Extensibility
+- Modular code structure for easy feature additions
+- Clear interfaces between components
+
+---
+
+## Challenges Faced
+
+### Markdown Parsing Edge Cases
+- Complex regex patterns for different markdown elements
+- Preventing paragraph tags inside other elements
+
+---
+
+## Implementation Highlights
+
+### Markdown Parser
+- Custom regex-based parser for markdown elements
+- Support for common markdown syntax
+- Special handling for presentation-specific elements
+
+### Navigation System
+- Keyboard shortcuts with debouncing
+- Touch controls for mobile
+- UI buttons with proper state handling
+
+### Editor Functionality
+- In-place editing with markdown preview
+- Save changes workflow
+
+---
+
+## Future Features
+
+### Immediate Next Steps
+- More comprehensive markdown support
+- Slide transitions and animations
+
+### Long-term Roadmap
+- Extensive browser Compatility
+
+---
+
+## Takeaways
+
+### Technical Learnings
+- Regex optimization for markdown parsing
+- Event handling best practices
+- Efficient state management in vanilla JS
+
+### Project Approach
+- Value of progressive enhancement
+
+### Skills Demonstrated
+- Clean architecture without frameworks
+- Modern JavaScript techniques
+- Responsive design implementation
+
+---
+
+## Final Thoughts
+
+Building Presently reminded me that simplicity is often better than complexity. Modern browsers now support features that previously required heavy libraries - why add dependencies when you don't need them?
+
+Sometimes the best solution is the simplest one.
+
+*Note: This presentation was created using Presently itself!*
