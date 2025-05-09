@@ -187,6 +187,11 @@ deleteSlideBtn?.addEventListener('click', () => {
         return;
     }
 
+    const userConfirmation = confirm('Are you sure you want to delete this slide?');
+    if (!userConfirmation) {
+        return;
+    }
+
     presentation.deleteCurrentSlide();
     const currentSlide = presentation.getCurrentSlide();
     handleSlideChange(currentSlide);
