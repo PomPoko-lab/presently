@@ -1,0 +1,36 @@
+
+:root {
+    /* Colors */
+    --primary: #008080;
+    --secondary: #FBFBFB;
+    --background-color: #f0f0f0;
+    --white: white;
+    --border-color: #d4d4d4;
+    --border-light: #e0e0e0;
+    --text-color: #333;
+    --text-muted: #9d9d9d;
+    --code-bg: #f7f7f7;
+    --inline-code-bg: #f1f1f1;
+    --inline-code-color: #d63384;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3.5rem;
+    
+    /* UI Elements */
+    --border-radius: 0.5rem;
+    --shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    --main-slide-height: 600px;
+    
+    /* Typography */
+    --font-size-small: 0.9rem;
+    --font-size-base: 1rem;
+    --line-height: 1.5;
+    --font-family-code: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
+    
+    /* Animation */
+    --transition-speed: 0.2s;
+}
