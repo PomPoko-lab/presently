@@ -1,6 +1,6 @@
 import { Slide } from './scripts/types.js';
-import MarkdownPresentation from './scripts/classes/MarkdownPresentation.js';
 import { loadFile } from './scripts/utils.js';
+import MarkdownPresentation from './scripts/classes/MarkdownPresentation.js';
 
 const DEFAULT_MARKDOWN_PATH = './default.md';
 
@@ -110,6 +110,31 @@ mdFileUploader?.addEventListener('change', async () => {
     }
     const fileUrl = URL.createObjectURL(file);
     loadMarkdown(fileUrl);
+});
+
+/**
+ * Handles the keyup event and navigates to the next or previous slide
+ * based on the pressed arrow key.
+ * @param {KeyboardEvent} event - The keyup event triggered by the user pressing an arrow key.
+ */
+window.addEventListener('keyup', (event) => {
+    if (!presentation) {
+        return;
+    }
+
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+        return;
+    }
+    
+    console.log('running');
+
+    if (event.key === 'ArrowLeft') {
+        const prevSlide = presentation.prevSlide();
+        handleSlideChange(prevSlide);
+    } else if (event.key === 'ArrowRight') {
+        const nextSlide = presentation.nextSlide();
+        handleSlideChange(nextSlide);
+    }
 });
 
 // Load the default.md on page load
