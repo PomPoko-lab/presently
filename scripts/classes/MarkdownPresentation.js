@@ -2,7 +2,7 @@ import { Slide } from "../types.js";
 import { escapeHtml } from "../utils.js";
 export default class {
     /** @private */
-    DELIMITER = '---';
+    DELIMITER = /^\s*---\s*$/m; // Regex for the slide delimiter, only triggers for --- on a new line
 
     /**
      * @param {string} markdown - Markdown content to parse into slides

@@ -1,5 +1,11 @@
 # Presently: A Markdown Presentation Tool
 
+### How to Use
+- Navigate slides using arrow keys or the buttons
+- Upload your own markdown by clicking "Load Slides (.md)"
+- Edit any slide by clicking the Edit button, then Save when done
+- Slides are separated by --- in your markdown files
+
 ## Architecture
 
 ### Core Technologies
@@ -8,12 +14,13 @@
 - **Module pattern** for code organization
 - **Mobile-first responsive design**
 
+---
+
 ### Component Structure
 - **MarkdownPresentation class**: Core engine for parsing and navigation
 - **UI Components**: Modular elements like slides, controllers, editor
 - **Utils**: Helper functions for file loading and HTML escaping
 
----
 
 ### Data Flow
 1. Load markdown content
