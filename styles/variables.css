@@ -23,7 +23,7 @@
     /* UI Elements */
     --border-radius: 0.5rem;
     --shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    --main-slide-height: 600px;
+    --main-slide-height: 400px;
     
     /* Typography */
     --font-size-small: 0.9rem;
@@ -33,4 +33,10 @@
     
     /* Animation */
     --transition-speed: 0.2s;
+}
+
+@media (min-height: 700px) {
+    :root {
+        --main-slide-height: 600px;
+    }
 }
