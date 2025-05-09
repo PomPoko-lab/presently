@@ -29,16 +29,12 @@ You can also use ~~strikethrough~~ if needed.
 
 * Item one
 * Item two
-  * Nested item
-  * Another nested item
 * Item three
 
 ### Ordered Lists
 
 1. First item
 2. Second item
-   1. Nested numbered item
-   2. Another nested item
 3. Third item
 
 ---

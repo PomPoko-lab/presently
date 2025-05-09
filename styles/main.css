@@ -178,3 +178,8 @@ code.inline-code {
     margin-right: 0.5rem;
     cursor: default;
 }
+
+ul > li, ol > li {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}

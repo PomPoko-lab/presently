@@ -71,15 +71,23 @@ export default class {
             return `<div class="checkbox-item"><input type="checkbox" ${isChecked} disabled><span>${text}</span></div>`;
         });
         
-        // Unordered lists
+        // Unordered lists - mark with ul-item class temporarily
         // Regex Matches: *, -
-        html = html.replace(/^\* (.*$)/gm, '<li>$1</li>');
-        html = html.replace(/^- (.*$)/gm, '<li>$1</li>');
-        html = html.replace(/(<li>.*<\/li>)+/g, '<ul>$&</ul>');
-        
-        // Ordered lists
-        // Regex Matches: 1.
-        html = html.replace(/^\d+\. (.*$)/gm, '<li>$1</li>');
+        html = html.replace(/^\* (.*$)/gm, '<li class="ul-item">$1</li>');
+        html = html.replace(/^- (.*$)/gm, '<li class="ul-item">$1</li>');
+
+        // Ordered lists - mark with ol-item class temporarily
+        html = html.replace(/^\d+\. (.*$)/gm, '<li class="ol-item">$1</li>');
+
+        // Group unordered list items
+        html = html.replace(/(<li class="ul-item">.*?<\/li>(\s*<li class="ul-item">.*?<\/li>)*)/g, '<ul>$1</ul>');
+
+        // Group ordered list items
+        html = html.replace(/(<li class="ol-item">.*?<\/li>(\s*<li class="ol-item">.*?<\/li>)*)/g, '<ol>$1</ol>');
+
+        // Now we'll clean up the teomorary classes
+        html = html.replace(/<li class="ul-item">(.*?)<\/li>/g, '<li>$1</li>');
+        html = html.replace(/<li class="ol-item">(.*?)<\/li>/g, '<li>$1</li>');
         
         // Links and images
         // Regex Matches: [text](url)
